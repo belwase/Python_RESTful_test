@@ -111,7 +111,14 @@ makes our jaw drop, but only if you have extra time, this is not mandatory
 
 * About the distances endpoint, please explain how would you scale this to hundreds and thousands of petitions per second, 
 considering this is a CPU intensive endpoint. 
+```
+ Since there is not any input parameter on this api and we'll be responding with same response 
+ (from same users in db). I think we can cache calculations for existing users in in-memory db. and for the request which has new users added, we can again calculate using cached value with new users. This way it will be fast for millions of petitions per seconds.
+```
 * How would you apporach this if latitude and longitude of user would be changing very frequently as well?  
+```
+in this case we can do partial caching to calculate only changed users, use some smart algorithms to calculate fast (or calculating from db itself), may go for cpython or numba which are lower level binding near to C, sometime way may need to scale infrastructure
+```
 
 
 **Deliverable**
